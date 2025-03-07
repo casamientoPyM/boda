@@ -359,6 +359,97 @@
         </footer>
     </div>
     
+    <div id="modal-donacion" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background-color: white; border-radius: 8px; padding: 30px; max-width: 500px; width: 90%; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center;">
+            <span id="cerrar-modal" style="position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #683A8E;">&times;</span>
+            
+            <h3 style="color: #4A266A; font-size: 1.8rem; margin-bottom: 20px; font-weight: 300;">Datos para Donación</h3>
+            
+            <div style="text-align: left; margin: 30px 0;">
+                <div style="margin-bottom: 15px;">
+                    <p style="font-weight: 500; margin-bottom: 5px; color: #683A8E;">CBU:</p>
+                    <p style="padding: 10px; background-color: #F5F3F7; border-radius: 4px;">0110031030003128376847</p>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <p style="font-weight: 500; margin-bottom: 5px; color: #683A8E;">Alias:</p>
+                    <p style="padding: 10px; background-color: #F5F3F7; border-radius: 4px;">boda.meli.pato</p>
+                </div>
+                
+                <div>
+                    <p style="font-weight: 500; margin-bottom: 5px; color: #683A8E;">Titular:</p>
+                    <p style="padding: 10px; background-color: #F5F3F7; border-radius: 4px;">Melissa Ximena Santana</p>
+                </div>
+            </div>
+            
+            <p style="font-style: italic; margin-top: 20px;">Muchas gracias por tu generosidad. Tu contribución nos ayudará a comenzar nuestra vida juntos.</p>
+            
+            <button id="copiar-cbu" class="boton" style="margin-top: 20px; background-color: #683A8E;">Copiar CBU</button>
+            <button id="copiar-alias" class="boton" style="margin-top: 20px; margin-left: 10px; background-color: #AE8EC9;">Copiar Alias</button>
+        </div>
+    </div>
+    
+    <!-- Script para el Modal -->
+    <script>
+        // Función para mostrar el modal
+        function mostrarModal() {
+            document.getElementById('modal-donacion').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevenir scroll
+        }
+        
+        // Función para cerrar el modal
+        function cerrarModal() {
+            document.getElementById('modal-donacion').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Permitir scroll nuevamente
+        }
+        
+        // Función para copiar texto al portapapeles
+        function copiarAlPortapapeles(texto) {
+            navigator.clipboard.writeText(texto).then(function() {
+                alert('Copiado al portapapeles');
+            }, function() {
+                alert('No se pudo copiar. Por favor, copia manualmente.');
+            });
+        }
+        
+        // Agregar event listeners cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Buscar el botón de donar por su texto
+            const botonesDonar = Array.from(document.querySelectorAll('a.boton')).filter(
+                boton => boton.textContent.trim() === 'Donar'
+            );
+            
+            // Si encontramos el botón de donar, añadir el event listener
+            if (botonesDonar.length > 0) {
+                botonesDonar.forEach(boton => {
+                    boton.addEventListener('click', function(e) {
+                        e.preventDefault(); // Prevenir navegación
+                        mostrarModal();
+                    });
+                });
+            }
+            
+            // Event listener para cerrar el modal
+            document.getElementById('cerrar-modal').addEventListener('click', cerrarModal);
+            
+            // Cerrar el modal al hacer clic fuera de él
+            document.getElementById('modal-donacion').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    cerrarModal();
+                }
+            });
+            
+            // Event listeners para los botones de copiar
+            document.getElementById('copiar-cbu').addEventListener('click', function() {
+                copiarAlPortapapeles('0110031030003128376847');
+            });
+            
+            document.getElementById('copiar-alias').addEventListener('click', function() {
+                copiarAlPortapapeles('boda.meli.pato');
+            });
+        });
+    </script>
+
     <script>
         // Contador de tiempo
         function actualizarContador() {
