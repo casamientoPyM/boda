@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charPack="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Regalos - Melissa & Patricio</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cormorant Garamond', serif;
+            color: #3A3042;
+            background-color: #F5F3F7;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        .header {
+            background-image: url('/api/placeholder/1600/900');
+            background-size: cover;
+            background-position: center;
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(68, 34, 102, 0.6);
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-top: 10px;
+        }
+        
+        .section {
+            padding: 50px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            color: #4A266A;
+        }
+        
+        .section p {
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+        }
+        
+        .separador {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        
+        .linea {
+            height: 1px;
+            background-color: #AE8EC9;
+            flex-grow: 1;
+            max-width: 100px;
+        }
+        
+        .flor {
+            margin: 0 15px;
+            font-size: 1.5rem;
+            color: #683A8E;
+        }
+        
+        .boton {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #683A8E;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        
+        .boton:hover {
+            background-color: #442266;
+        }
+        
+        .lista-regalos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            text-align: left;
+        }
+        
+        .item-regalo {
+            background-color: #FFFFFF;
+            border: 1px solid #D8C8E8;
+            border-radius: 5px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .item-regalo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(68, 34, 102, 0.15);
+        }
+        
+        .item-regalo h4 {
+            color: #4A266A;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .item-regalo p {
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+        
+        .item-regalo .precio {
+            font-weight: 500;
+            color: #683A8E;
+            margin-top: auto;
+        }
+        
+        .item-regalo .estado {
+            margin-top: 15px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .disponible {
+            background-color: #EBE5F3;
+            color: #683A8E;
+        }
+        
+        .reservado {
+            background-color: #E5F3EB;
+            color: #2A8E4A;
+        }
+        
+        footer {
+            padding: 30px;
+            text-align: center;
+            background-color: #D8C8E8;
+            font-size: 0.9rem;
+            color: #442266;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>Lista de Regalos</h1>
+                <h2>Melissa & Patricio</h2>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="separador">
+                <div class="linea"></div>
+                <div class="flor">❦</div>
+                <div class="linea"></div>
+            </div>
+            
+            <h3>Nuestro futuro hogar</h3>
+            <p>Gracias por querer formar parte de nuestro nuevo comienzo. Estos son algunos artículos que nos ayudarán a construir nuestro primer hogar juntos.</p>
+            
+            <div id="lista-regalos" class="lista-regalos">
+                <!-- Los elementos de regalo se generarán dinámicamente aquí -->
+            </div>
+            
+            <div class="separador">
+                <div class="linea"></div>
+                <div class="flor">❦</div>
+                <div class="linea"></div>
+            </div>
+            
+            <p>Si deseas regalar alguno de los artículos disponibles, por favor contáctanos para coordinar.</p>
+            
+            <a href="#" class="boton">Contactar</a>
+            <a href="index.html" class="boton" style="background-color: #AE8EC9; margin-left: 10px;">Volver a inicio</a>
+        </div>
+        
+        <footer>
+            <p>Melissa & Patricio | 11 de Octubre de 2025</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Datos de los regalos
+        const listaRegalos = [
+            {
+                nombre: "Juego de Ollas",
+                descripcion: "Pack de toallas para manos",
+                precio: "$120.000",
+                estado: "disponible"
+            },
+            {
+                nombre: "Juego de Sábanas",
+                descripcion: "Sábanas de algodón, 2 plazas",
+                precio: "$89.000",
+                estado: "disponible"
+            },
+            {
+                nombre: "Mopa",
+                descripcion: "Mopa con balde escurridor",
+                precio: "$45.000",
+                estado: "disponible"
+            },
+            {
+                nombre: "Canastos",
+                descripcion: "Pack de canastos organizador",
+                precio: "$150.000",
+                estado: "disponible"
+            },
+            {
+                nombre: "Juego de Vasos",
+                descripcion: "Pack de 12 vasos de vidrio",
+                precio: "$35.000",
+                estado: "disponible"
+            },
+            {
+                nombre: "Repasadores",
+                descripcion: "Pack de Repasadores",
+                precio: "$75.000",
+                estado: "disponible"
+            },
+            {
+                nombre: "Juego de Toallas",
+                descripcion: "Pack de 6 toallas de algodón",
+                precio: "$60.000",
+                estado: "disponible"
+            },
+            {
+                nombre: "Batidora",
+                descripcion: "Batidora apta para mezclar masas",
+                precio: "$65.000",
+                estado: "disponible"
+            },
+            {
+                nombre: "Pack de cuchillas",
+                descripcion: "Juego de cuchillas",
+                precio: "$95.000",
+                estado: "disponible"
+            }
+        ];
+        
+        // Función para crear un elemento de regalo
+        function crearElementoRegalo(regalo) {
+            const itemRegalo = document.createElement('div');
+            itemRegalo.className = 'item-regalo';
+            
+            const nombre = document.createElement('h4');
+            nombre.textContent = regalo.nombre;
+            
+            const descripcion = document.createElement('p');
+            descripcion.textContent = regalo.descripcion;
+            
+            // const precio = document.createElement('p');
+            // precio.className = 'precio';
+            // precio.textContent = regalo.precio;
+            
+            const estado = document.createElement('div');
+            estado.className = `estado ${regalo.estado}`;
+            estado.textContent = regalo.estado.charAt(0).toUpperCase() + regalo.estado.slice(1);
+            
+            itemRegalo.appendChild(nombre);
+            itemRegalo.appendChild(descripcion);
+            //itemRegalo.appendChild(precio);
+            itemRegalo.appendChild(estado);
+            
+            return itemRegalo;
+        }
+        
+        // Función para renderizar todos los regalos
+        function renderizarListaRegalos() {
+            const contenedor = document.getElementById('lista-regalos');
+            contenedor.innerHTML = ''; // Limpiar el contenedor
+            
+            listaRegalos.forEach(regalo => {
+                const elemento = crearElementoRegalo(regalo);
+                contenedor.appendChild(elemento);
+            });
+        }
+        
+        // Inicializar la lista de regalos al cargar la página
+        document.addEventListener('DOMContentLoaded', renderizarListaRegalos);
+    </script>
+</body>
+</html>
